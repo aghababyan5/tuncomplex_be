@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,3 +18,11 @@
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
+
+Route::group(['middleware' => 'api'],
+    function () {
+        Route::post('/register', RegisterController::class);
+        Route::group(['middleware' => 'auth:api'], function () {
+            Route::post('/logout', LogoutController::class);
+        });
+    });
