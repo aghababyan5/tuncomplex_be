@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Partners;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class StorePartnerRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -22,13 +23,11 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|confirmed|min:8',
-            'password_confirmation' => 'required|min:8',
-            'phone' => 'required|integer',
-            'phone_code' => 'required|string'
+            'icon'        => 'required|image|mimes:jpeg,jpg,png,gif|max:2048',
+            'name'        => 'required|string',
+            'description' => 'required|string',
+            'website_url' => 'sometimes|string',
         ];
     }
+
 }

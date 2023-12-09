@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Partners\GetPartnersController;
+use App\Http\Controllers\Partners\StorePartnerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'api'],
     function () {
         Route::post('/register', RegisterController::class);
+        Route::get('/partners', GetPartnersController::class);
+        Route::post('/partner', StorePartnerController::class);
         Route::group(['middleware' => 'auth:api'], function () {
             Route::post('/logout', LogoutController::class);
         });
