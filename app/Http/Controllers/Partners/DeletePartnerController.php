@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\PartnerService;
 use Illuminate\Http\JsonResponse;
 
-class GetPartnersController extends Controller
+class DeletePartnerController extends Controller
 {
 
     protected $service;
@@ -16,10 +16,12 @@ class GetPartnersController extends Controller
         $this->service = $service;
     }
 
-    public function __invoke(): JsonResponse
+    public function __invoke($id): JsonResponse
     {
+        $this->service->destroy($id);
+
         return response()->json([
-            'partners' => $this->service->getAll(),
+            'message' => 'Data deleted successfully',
         ]);
     }
 

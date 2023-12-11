@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Partners;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Partners\StorePartnerRequest;
 use App\Services\PartnerService;
+use Illuminate\Http\JsonResponse;
 
 class StorePartnerController extends Controller
 {
@@ -16,7 +17,7 @@ class StorePartnerController extends Controller
         $this->service = $service;
     }
 
-    public function __invoke(StorePartnerRequest $request)
+    public function __invoke(StorePartnerRequest $request): JsonResponse
     {
         $this->service->store($request->validated());
 

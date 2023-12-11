@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Partners;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Partners\UpdatePartnerRequest;
 use App\Services\PartnerService;
 use Illuminate\Http\JsonResponse;
 
-class GetPartnersController extends Controller
+class UpdatePartnerController extends Controller
 {
 
     protected $service;
@@ -16,10 +17,12 @@ class GetPartnersController extends Controller
         $this->service = $service;
     }
 
-    public function __invoke(): JsonResponse
+    public function __invoke($id, UpdatePartnerRequest $request): JsonResponse
     {
+        $this->service->update($id, $request->validated());
+
         return response()->json([
-            'partners' => $this->service->getAll(),
+            'message' => 'Data updated successfully',
         ]);
     }
 
