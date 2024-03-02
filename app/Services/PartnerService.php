@@ -19,6 +19,7 @@ class PartnerService
     {
         $iconName = Str::random(32).'.'
             .$data['icon']->getClientOriginalExtension();
+
         Storage::disk('public')->put(
             '/partners/'.$iconName,
             file_get_contents($data['icon'])
@@ -39,16 +40,21 @@ class PartnerService
 
     public function update($id, array $data)
     {
-        $partner = Partner::find($id);
+        $partner = Partner::findOrFail($id);
 
-        if (!$partner) {
-            abort(404);
+        if (isset($data['icon']) && $data['icon'] != '') {
+            return $this->updateWithIcon($partner, $data);
         }
 
+        return $this->updateWithoutIcon($partner, $data);
+    }
+
+    public function updateWithIcon($partner, $data)
+    {
         $oldIconName = $partner['icon'];
         $newIcon = $data['icon'];
-        $newIconName = Str::random(32).'.'.$newIcon->getClientOriginalExtension(
-            );
+        $newIconName = Str::random(32).'.'
+            .$newIcon->getClientOriginalExtension();
 
         Storage::disk('public')->delete('partners/'.$oldIconName);
         Storage::disk('public')->put(
@@ -58,6 +64,15 @@ class PartnerService
 
         return $partner->update([
             'icon'        => $newIconName,
+            'name'        => $data['name'],
+            'description' => $data['description'],
+            'website_url' => $data['website_url'],
+        ]);
+    }
+
+    public function updateWithoutIcon($partner, $data)
+    {
+        return $partner->update([
             'name'        => $data['name'],
             'description' => $data['description'],
             'website_url' => $data['website_url'],

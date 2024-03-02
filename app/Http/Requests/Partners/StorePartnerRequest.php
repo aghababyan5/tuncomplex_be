@@ -26,7 +26,7 @@ class StorePartnerRequest extends FormRequest
             'icon'        => 'required|image|mimes:jpeg,jpg,png,gif|max:2048',
             'name'        => 'required|string',
             'description' => 'required|string',
-            'website_url' => 'sometimes|string',
+            'website_url' => 'required|string',
         ];
     }
 

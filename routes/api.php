@@ -28,11 +28,19 @@ Route::group(['middleware' => 'api'],
     function () {
         Route::post('/register', RegisterController::class);
         Route::get('/partners', GetPartnersController::class); // tested
-        Route::get('/partner/{id}', ShowPartnerController::class); // tested
-        Route::post('/partner', StorePartnerController::class); // tested
-        Route::post('/partner/{id}', UpdatePartnerController::class); // tested
-        Route::delete('/partner/{id}', DeletePartnerController::class); //
+        Route::get('/partners/{id}', ShowPartnerController::class); // tested
+        Route::post('/partners', StorePartnerController::class); // tested
+        Route::post('/partners/{id}', UpdatePartnerController::class);
+        Route::delete('/partners/{id}', DeletePartnerController::class); // tested
         Route::group(['middleware' => 'auth:api'], function () {
             Route::post('/logout', LogoutController::class);
         });
     });
+
+/*
+ * GET {host}/api/partners = sax partnyornerin iranc datanerov full get a anum
+ * GET {host}/api/partners/{id} = mi hat partnyorin a get anum yst id-i
+ * POST {host}/api/partners = partnyor sarqelu hamara, petq en esqan baner: icon (nkarna), name, description, website_url
+ * POST {host}/api/partners/{id} = partyor update anelu hamara, nuyn dzevi: icon, name, description, website_url
+ * DELETE {host}/api/partners{id} = partnyor jnjelu hamara
+ */

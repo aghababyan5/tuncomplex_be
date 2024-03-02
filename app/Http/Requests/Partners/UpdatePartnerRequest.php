@@ -23,7 +23,7 @@ class UpdatePartnerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'icon'        => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'icon'        => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
             'name'        => 'required|string',
             'description' => 'required|string',
             'website_url' => 'required|string',
