@@ -9,7 +9,6 @@ use Illuminate\Http\JsonResponse;
 
 class UpdatePartnerController extends Controller
 {
-
     protected $service;
 
     public function __construct(PartnerService $service)

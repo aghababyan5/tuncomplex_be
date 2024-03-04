@@ -35,7 +35,7 @@ class PartnerService
 
     public function show($id)
     {
-        return Partner::find($id);
+        return Partner::findOrFail($id);
     }
 
     public function update($id, array $data)

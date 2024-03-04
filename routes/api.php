@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\MenuHierarchy\GetAllMenuHierarchyController;
+use App\Http\Controllers\MenuHierarchy\ShowMenuHierarchyController;
+use App\Http\Controllers\MenuHierarchy\StoreMenuHierarchyController;
 use App\Http\Controllers\Partners\DeletePartnerController;
 use App\Http\Controllers\Partners\GetPartnersController;
 use App\Http\Controllers\Partners\ShowPartnerController;
@@ -28,10 +31,19 @@ Route::group(['middleware' => 'api'],
     function () {
         Route::post('/register', RegisterController::class);
         Route::get('/partners', GetPartnersController::class); // tested
-        Route::get('/partners/{id}', ShowPartnerController::class); // tested
+        Route::get(
+            '/partners/{id}',
+            ShowPartnerController::class
+        ); // tested
         Route::post('/partners', StorePartnerController::class); // tested
         Route::post('/partners/{id}', UpdatePartnerController::class);
-        Route::delete('/partners/{id}', DeletePartnerController::class); // tested
+        Route::delete(
+            '/partners/{id}',
+            DeletePartnerController::class
+        ); // tested
+        Route::post('/menu', StoreMenuHierarchyController::class);
+        Route::get('/menu', GetAllMenuHierarchyController::class);
+        Route::get('/menu/{id}', ShowMenuHierarchyController::class);
         Route::group(['middleware' => 'auth:api'], function () {
             Route::post('/logout', LogoutController::class);
         });
